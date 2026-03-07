@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Intake | FFTPro</title>
+  <link rel="stylesheet" href="../css/patient-intake.css" />
+</head>
+<body>
+
+  <header class="topbar">
+   <div class="sidebar-header">
+    <h2><a href="../pages/dashboard.html" class="brand-link">FFT<span>Pro</span> </a></h2>
+    </div>
+    <a class="btn-link" href="../pages/dashboard.html">← Back to Dashboard</a>
+  </header>
+
+  <main class="container">
+
+    <!-- SECTION: Create / Add Patient -->
+    <section class="card">
+      <h1>Patient Demographics</h1>
+
+      <form id="patientForm" class="grid">
+       
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" placeholder="e.g., Abhigyaan Singh" required />
+        </div>
+
+        <div class="field">
+          <label for="age">Age (years)</label>
+          <select id="age" required>
+            <option value="">Select age</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="gender">Gender</label>
+          <select id="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="heightCm">Height (cm)</label>
+          <input id="heightCm" type="number" min="50" max="250" placeholder="e.g., 170" required />
+        </div>
+
+        <div class="field">
+          <label for="weightKg">Weight (kg)</label>
+          <input id="weightKg" type="number" min="20" max="300" placeholder="e.g., 68" required />
+        </div>
+
+        <div class="field">
+          <label for="painScore">Pain Score (0-10)</label>
+          <select id="painScore" required>
+            <option value="">Select pain score</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="nationality">Nationality (optional)</label>
+          <input id="nationality" type="text" placeholder="e.g., Indian, American, British" />
+        </div>
+
+        <div class="actions full">
+          <button type="submit" class="btn-primary">Save Patient</button>
+          <button type="button" id="resetBtn" class="btn-secondary">Clear</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="../js/patient-intake.js" defer></script>
+</body>
+</html>

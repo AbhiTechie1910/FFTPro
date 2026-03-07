@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Assessments | FFTPro</title>
+  <link rel="stylesheet" href="../css/assessments-select.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="dashboard.html" class="brand-link">FFT<span>Pro</span></a>
+        </div>
+
+    <div class="topbar-actions">
+      <a href="consent.html" class="back-link">← Back to Consent</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <h1>Choose Assessments</h1>
+          <p class="muted">Select one or more assessments to begin for this patient.</p>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-box">
+          <div class="summary-label">Patient</div>
+          <div id="patientName" class="summary-title">—</div>
+          <div id="patientId" class="summary-sub">—</div>
+          <div class="summary-meta">
+            <span id="patientAgeGender">—</span>
+            <span id="patientHeightWeight">—</span>
+            <span id="patientPainScore">—</span>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">Consent</div>
+          <div id="consentStatus" class="summary-title">—</div>
+          <div id="consentTimestamp" class="summary-sub">—</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <form id="assessmentForm" class="tests">
+        <h2>Assessments</h2>
+
+        <label class="check">
+          <input type="checkbox" value="chair_sit_reach" />
+          Chair Sit & Reach
+        </label>
+
+        <label class="check">
+          <input type="checkbox" value="chair_sit_to_stand" />
+          Chair Sit-to-Stand (30s)
+        </label>
+
+        <label class="check">
+          <input type="checkbox" value="single_leg_stance" />
+          Single-Leg Stance
+        </label>
+
+        <label class="check">
+          <input type="checkbox" value="back_scratch" />
+          Back Scratch Test
+        </label>
+
+        <label class="check">
+          <input type="checkbox" value="tug_test" />
+          Timed Up & Go (TUG)
+        </label>
+
+       <div class="actions">
+        <button type="submit" class="btn-primary" id="startAssessmentsBtn">
+          Start Assessments
+        </button>
+        <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+      </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="../js/assessments-select.js" defer></script>
+</body>
+</html>

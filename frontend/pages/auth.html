@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Authenticate | FFTPro</title>
+
+  <!-- Single unified stylesheet for Login/Register/Forgot -->
+<link rel="stylesheet" href="../css/auth.css" />
+<script src="../js/auth.js" defer></script>
+
+</head>
+<body>
+
+  <div class="auth-shell">
+    <div class="auth-layout">
+
+      <!-- LEFT BRAND PANEL -->
+      <aside class="auth-left">
+        <div class="brand">
+         <div class="logo">
+  <a href="index.html" style="text-decoration: none; color: inherit;">
+    FFT<span>Pro</span>
+  </a>
+</div>
+          <p class="tagline">
+            Secure access to evidence-based functional fitness assessments,
+            clinical reports, and AI-assisted insights.
+          </p>
+
+          <ul class="benefits">
+            <li>✔ Standardized Functional Tests</li>
+            <li>✔ Clinical-Grade Reports</li>
+            <li>✔ Data-Driven Decision Making</li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- RIGHT FORM PANEL -->
+      <main class="auth-right">
+        <div class="auth-card">
+
+          <!-- TOP SWITCH -->
+          <div class="auth-switch">
+            <button class="switch-btn active" data-view="login">Login</button>
+            <button class="switch-btn" data-view="register">Register</button>
+          </div>
+
+          <!-- LOGIN VIEW -->
+          <section class="view active" id="view-login">
+            <h2>Sign in to your account</h2>
+            <p class="subtitle">Welcome back. Please enter your credentials.</p>
+
+            <form id="loginForm" class="form">
+              <div class="field">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" required placeholder="clinician@hospital.com" />
+              </div>
+
+              <div class="field">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required placeholder="••••••••" />
+              </div>
+
+              <div class="row-between">
+                <label class="check">
+                  <input type="checkbox" id="rememberMe" />
+                  Remember me
+                </label>
+
+                <a href="#" class="link" data-action="goto-forgot">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn-primary">Login</button>
+
+              <p class="muted center">
+                Don’t have an account?
+                <a href="#" class="link" data-action="goto-register">Create one</a>
+              </p>
+
+              <div class="error" id="loginError" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <!-- REGISTER VIEW -->
+          <section class="view" id="view-register">
+            <h2>Create Account</h2>
+            <p class="subtitle">Create your clinician account to get started.</p>
+
+            <form id="registerForm" class="form">
+              <div class="field">
+                <label for="regFullName">Full Name</label>
+                <input id="regFullName" type="text" placeholder="e.g., Dr. Abhigyaan Singh" required />
+              </div>
+
+              <div class="row two">
+                <div class="field">
+                  <label for="regEmail">Email</label>
+                  <input id="regEmail" type="email" placeholder="e.g., care@clinic.com" required />
+                </div>
+                <div class="field">
+                  <label for="regPhone">Phone</label>
+                  <input id="regPhone" type="text" placeholder="e.g., +91 98xxxxxx21" />
+                </div>
+              </div>
+
+              <div class="row two">
+                <div class="field">
+                  <label for="regPassword">Password</label>
+                  <input id="regPassword" type="password" placeholder="Min 8 characters" required />
+                  <small class="hint">Use 8+ characters with a number for better security.</small>
+                </div>
+                <div class="field">
+                  <label for="regConfirmPassword">Confirm Password</label>
+                  <input id="regConfirmPassword" type="password" placeholder="Re-enter password" required />
+                </div>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" id="terms" required />
+                I agree to the Terms & Privacy Policy
+              </label>
+
+              <button class="btn-primary" type="submit">Create Account</button>
+
+              <p class="muted center">
+                Already have an account?
+                <a href="#" class="link" data-action="goto-login">Login</a>
+              </p>
+
+              <div class="error" id="registerError" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <!-- FORGOT VIEW -->
+          <section class="view" id="view-forgot">
+            <h2>Forgot Password</h2>
+            <p class="subtitle">Reset your password securely.</p>
+
+            <form id="forgotForm" class="form">
+              <div class="field">
+                <label for="forgotEmail">Account Email</label>
+                <input id="forgotEmail" type="email" placeholder="your@email.com" required />
+              </div>
+
+              <button class="btn-primary" type="submit">Generate Reset Link</button>
+
+              <div class="notice" id="forgotNotice"></div>
+              <div class="error" id="forgotError" aria-live="polite"></div>
+
+              <p class="muted center">
+                Back to <a href="#" class="link" data-action="goto-login">Login</a>
+              </p>
+            </form>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="frontend/js/auth.js" defer></script>
+</body>
+</html>

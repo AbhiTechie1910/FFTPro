@@ -1,0 +1,80 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", sans-serif; }
+
+body { background: #f3f4f6; color: #111827; }
+
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 24px; background: #2563eb; color: #fff;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.brand-link { color: #fff; text-decoration: none; font-size: 22px; }
+.brand-link span { color: #bfdbfe; }
+
+.chip {
+  background: #1e40af; color: #e0f2fe; padding: 4px 10px;
+  border-radius: 999px; font-size: 12px; font-weight: 700;
+}
+
+.topbar-actions .back-link {
+  color: #fff; text-decoration: none; background: #1e40af;
+  padding: 8px 12px; border-radius: 8px;
+}
+
+.container { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+
+.card {
+  background: #fff; border-radius: 14px; padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+h1 { font-size: 22px; margin-bottom: 6px; }
+h2 { font-size: 18px; margin-bottom: 10px; }
+
+.muted { color: #6b7280; margin-top: 4px; }
+
+.summary-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px; margin-top: 16px;
+}
+
+.summary-box {
+  background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px;
+  padding: 14px;
+}
+
+.summary-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.6px; }
+.summary-title { font-size: 18px; font-weight: 700; margin-top: 6px; }
+.summary-sub { font-size: 13px; color: #374151; margin-top: 4px; }
+
+.summary-meta {
+  display: grid; gap: 6px; margin-top: 10px; font-size: 13px; color: #374151;
+}
+
+.divider { height: 1px; background: #e5e7eb; margin: 18px 0; }
+
+.tests { display: grid; gap: 10px; }
+
+.check {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; border: 1px solid #e5e7eb; border-radius: 12px;
+  background: #fff;
+}
+
+.actions { display: flex; gap: 10px; margin-top: 8px; }
+
+.btn-primary {
+  background: #2563eb; color: #fff; border: 0; padding: 10px 14px;
+  border-radius: 10px; cursor: pointer;
+}
+.btn-primary:hover { background: #1e40af; }
+
+.btn-secondary {
+  background: #e5e7eb; color: #111827; border: 0; padding: 10px 14px;
+  border-radius: 10px; cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .actions { flex-direction: column; align-items: stretch; }
+}

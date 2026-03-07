@@ -1,0 +1,357 @@
+:root{
+  --bg:#f3f4f6;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --primary:#2563eb;
+  --primaryDark:#1e40af;
+  --accent:#bfdbfe;
+  --shadow: 0 14px 30px rgba(2,6,23,0.10);
+  --radius: 16px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar{
+  max-width: 1120px;
+  margin: 22px auto 0;
+  padding: 14px 18px;
+  background: var(--primary);
+  border-radius: 16px;
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  box-shadow: var(--shadow);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-link{
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  font-size: 20px;
+  letter-spacing:0.2px;
+}
+
+.brand-link span{ color: var(--accent); }
+
+.chip{
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.24);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.back-link{
+  color:#fff;
+  text-decoration:none;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.24);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+.back-link:hover{ background: rgba(255,255,255,0.22); }
+
+/* PAGE */
+.container{
+  max-width: 1120px;
+  margin: 18px auto 26px;
+  padding: 0 16px;
+}
+
+.card{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(15,23,42,0.05);
+  overflow: hidden;
+}
+
+/* HEADER AREA */
+.card-head{
+  padding: 22px 22px;
+  display:grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 18px;
+}
+
+.head-left h1{
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.1px;
+  margin-bottom: 8px;
+}
+
+.subtext{
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: 14px;
+  max-width: 760px;
+}
+
+.meta-row{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.meta-pill{
+  border: 1px solid var(--border);
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 210px;
+}
+
+.meta-label{
+  display:block;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.meta-value{
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.head-right{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patient-box,
+.therapist-box{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #fafafa;
+}
+
+.patient-label{
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.patient-name{
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.patient-id{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12.5px;
+  color: #0f172a;
+  margin-top: 4px;
+}
+
+.patient-sub{
+  margin-top: 10px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.stamp-wrap{
+  margin-top: 10px;
+}
+
+.stamp-label{
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+#clinicStamp{
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* BODY CONTENT */
+.divider{
+  height: 1px;
+  background: var(--border);
+}
+
+.content{
+  padding: 6px 22px 10px;
+}
+
+.block{
+  padding: 16px 0;
+  border-bottom: 1px dashed rgba(229,231,235,0.95);
+}
+.block:last-child{ border-bottom:none; }
+
+.block h2{
+  font-size: 15px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.block p{
+  font-size: 14px;
+  line-height: 1.8;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+ul{
+  margin-left: 18px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+li{ margin-bottom: 8px; }
+
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.panel{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.panel h3{
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.panel.wide{ margin-top: 14px; }
+
+.callout{
+  margin-top: 12px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+.footer{
+  padding: 18px 22px;
+  background: #fafafa;
+}
+
+.consent-row{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.check{
+  display:flex;
+  gap: 10px;
+  align-items:flex-start;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.check input{
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.hint{
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.actions{
+  display:flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  border:none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 900;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+  transition: background-color 0.2s ease, transform 0.12s ease, opacity 0.2s ease;
+}
+.btn:active{ transform: scale(0.99); }
+
+.btn-ghost{
+  background:#fff;
+  border: 1px solid var(--border);
+  color: #0f172a;
+}
+.btn-ghost:hover{ background:#f9fafb; }
+
+.btn-primary{
+  background: var(--primary);
+  color:#fff;
+}
+.btn-primary:hover{ background: var(--primaryDark); }
+.btn-primary:disabled{
+  opacity: 0.55;
+  cursor:not-allowed;
+  background: #93c5fd;
+}
+
+.legal-note{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .topbar{ margin: 12px auto 0; flex-direction:column; align-items:flex-start; }
+  .card-head{ grid-template-columns: 1fr; }
+  #clinicStamp{ max-height: 160px; }
+  .grid{ grid-template-columns: 1fr; }
+}
+    

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Consent | FFTPro</title>
+  <link rel="stylesheet" href="../css/consent.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="dashboard.html" class="brand-link">FFT<span>Pro</span></a>
+      <span class="chip">Digital Consent</span>
+    </div>
+
+    <div class="topbar-actions">
+      <a href="patient-intake.html" class="back-link">← Back to Patient Intake</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+
+      <div class="card-head">
+        <div class="head-left">
+          <h1>Digital Informed Consent & Data Use Agreement</h1>
+          <p class="subtext">
+            Consent is required prior to initiating assessments for newly added patients.
+            Please review the terms below and provide consent to proceed.
+          </p>
+
+          <div class="meta-row">
+            <div class="meta-pill">
+              <span class="meta-label">Consent Timestamp</span>
+              <span id="consentTimestamp" class="meta-value">—</span>
+            </div>
+            <div class="meta-pill">
+              <span class="meta-label">Consent Version</span>
+              <span id="consentVersion" class="meta-value">v1.0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="head-right">
+          <div class="patient-box">
+            <div class="patient-label">Patient</div>
+            <div id="patientName" class="patient-name">—</div>
+            <div id="patientId" class="patient-id">—</div>
+                        <div class="patient-sub">
+              <span id="patientAgeGender">—</span>
+              <span id="patientNationality">—</span>
+              <span id="patientHeightWeight">—</span>
+              <span id="patientPainScore">—</span>
+            </div>
+          </div>
+
+          <div class="therapist-box">
+            <div class="patient-label">Therapist / Clinic</div>
+            <div id="therapistName" class="patient-name">—</div>
+            <div id="clinicName" class="patient-id">—</div>
+
+            <div class="stamp-wrap">
+              <div class="stamp-label">Clinic Stamp</div>
+              <img id="clinicStamp" src="assets/clinic/clinic-stamp.png" alt="Clinic Stamp" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="content">
+
+        <section class="block">
+          <h2>1. Purpose of the Assessment</h2>
+          <p>
+            I understand that functional fitness assessments conducted using FFTPro are intended to evaluate physical
+            performance parameters such as strength, balance, flexibility, endurance, mobility, and functional independence.
+            These assessments may assist the therapist in clinical decision-making, progress tracking, and documentation.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>2. Data Collected</h2>
+
+          <div class="grid">
+            <div class="panel">
+              <h3>a. Demographic Information</h3>
+              <ul>
+                <li>Full name, age, gender, nationality</li>
+                <li>System-generated Patient ID</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3>b. Health & Assessment Data</h3>
+              <ul>
+                <li>Test results and performance metrics</li>
+                <li>Clinician observations</li>
+                <li>Derived measurements (angles, distances, timing)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="panel wide">
+            <h3>c. Visual & Motion Data</h3>
+            <ul>
+              <li>Live video feed during assessment</li>
+              <li>Still images/extracted frames (if required for analysis)</li>
+              <li>Pose-estimation / biomechanical markers derived from video</li>
+            </ul>
+          </div>
+
+          <div class="callout">
+            <b>Important:</b> Video/image data is processed strictly for clinical assessment, measurement, and documentation.
+            It is not used for advertising or unrelated commercial purposes.
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>3. Use of Video, Image, and Motion Data</h2>
+          <p>
+            I expressly consent to the capture, processing, and analysis of my video and image data solely for functional
+            assessment, clinical interpretation, performance measurement, and reporting within FFTPro.
+          </p>
+          <ul>
+            <li>Raw video is not shared with third parties without explicit authorization or legal obligation.</li>
+            <li>Pose-estimation outputs are used to compute movement metrics and are restricted to clinical purposes.</li>
+            <li>Access is restricted to the treating therapist and authorized system components.</li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>4. Data Storage & Security</h2>
+          <p>
+            Data is stored in a secure digital environment with access controls and reasonable technical/organizational safeguards
+            designed to mitigate unauthorized access, misuse, or disclosure.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>5. Confidentiality</h2>
+          <p>My information will be treated as confidential healthcare information and will not be disclosed except:</p>
+          <ul>
+            <li>Where required by applicable law or lawful request</li>
+            <li>Where explicitly authorized by me</li>
+            <li>Where required for medical/legal compliance within permitted limits</li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>6. Voluntary Participation</h2>
+          <p>
+            Participation is voluntary. I may withdraw consent at any time prior to or during assessment. Withdrawal may limit
+            the ability to continue/complete assessments and may affect record completeness.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>7. Limitation of Liability</h2>
+          <p>
+            FFTPro is an assessment support tool and does not provide independent medical diagnosis. Final clinical interpretation
+            remains with the licensed therapist. FFTPro and the therapist are not liable for outcomes resulting from incomplete,
+            inaccurate, or interrupted capture beyond reasonable control.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>8. Patient Rights</h2>
+          <p>
+            I have the right to ask questions, request clarification on data handling, request access to my records, and request
+            deletion where legally and clinically permissible.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>9. Consent Declaration</h2>
+          <p>
+            By checking the box below, I confirm I have read and understood this consent and voluntarily agree to participate in
+            the assessments and data practices described.
+          </p>
+        </section>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <footer class="footer">
+        <div class="consent-row">
+          <label class="check">
+            <input type="checkbox" id="consentCheck" />
+            <span>
+              <b>I hereby provide my informed digital consent</b> to the collection, processing, and secure storage of my video,
+              image, demographic details, and healthcare-related assessment data for clinical purposes as described above.
+            </span>
+          </label>
+
+          <p class="hint">
+            “Start Assessment” remains disabled until consent is provided.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-ghost" id="cancelBtn" type="button">Cancel</button>
+          <button class="btn btn-ghost" id="downloadPdfBtn" type="button">Download PDF</button>
+          <button class="btn btn-primary" id="startBtn" type="button" >Start Assessment</button>
+        </div>
+
+        <p class="legal-note">
+          This consent applies to newly added patients prior to their first assessment. Existing patients with recorded consent
+          may bypass this step as per system records.
+        </p>
+      </footer>
+
+    </section>
+  </main>
+
+  <!-- jsPDF via CDN (If offline: download and serve locally, then replace this script src) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <script src="../js/consent.js" defer></script>
+</body>
+</html>
+
