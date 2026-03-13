@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Therapist Profile | FFTPro</title>
+  <link rel="stylesheet" href="../css/profile.css" />
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <h2 class="brand">
+        <a href="dashboard.html" class="brand-link">FFT<span>Pro</span></a>
+      </h2>
+
+      <nav class="topbar-nav">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="dashboard.html#patients">Patients</a></li>
+          <li><a href="patient-intake.html">New Patient</a></li>
+          <li><a href="dashboard.html#reports">Reports</a></li>
+          <li><a href="functional-tests.html">Functional Tests</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <span id="currentDate"></span>
+    <div class="user-menu">
+      <button class="user-btn" id="userMenuBtn" type="button">
+        <span class="user-icon">👤</span>
+        <span class="user-name" id="topbarUserName">Therapist</span>
+        <span class="user-role" id="topbarUserRole">Profile</span>
+      </button>
+
+      <div class="user-dropdown" id="userDropdown">
+        <a href="index.html" id="logoutLink" class="logout">Logout</a>
+      </div>
+    </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <div class="title-row">
+        <h1>Therapist Profile</h1>
+        <button id="editProfileBtn" class="edit-btn" title="Edit Profile" type="button">✏️</button>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-secondary" id="cancelEditBtn" type="button" disabled>Cancel</button>
+        <button class="btn-primary" id="saveProfileBtn" type="button" disabled>Save Changes</button>
+      </div>
+    </header>
+
+    <!-- GRID -->
+    <section class="grid">
+
+      <!-- Therapist & Clinic -->
+      <div class="card">
+        <h2>Therapist & Clinic Details</h2>
+        <p class="muted">Appears on consent forms, reports, and exports.</p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="therapistName">Therapist Name</label>
+            <input id="therapistName" disabled />
+          </div>
+
+          <div class="field">
+            <label for="therapistRole">Role / Qualification</label>
+            <input id="therapistRole" disabled />
+          </div>
+
+          <div class="field">
+            <label for="licenseNo">Registration / License No.</label>
+            <input id="licenseNo" disabled />
+          </div>
+
+          <div class="field">
+            <label for="experienceYears">Experience (years)</label>
+            <input id="experienceYears" type="number" disabled />
+          </div>
+
+          <div class="field">
+            <label for="email">Clinic Email</label>
+            <input id="email" type="email" disabled />
+          </div>
+
+          <div class="field">
+            <label for="phone">Clinic Phone</label>
+            <input id="phone" disabled />
+          </div>
+
+          <div class="field full">
+            <label for="clinicName">Clinic Name</label>
+            <input id="clinicName" disabled />
+          </div>
+
+          <div class="field full">
+            <label for="clinicAddress">Clinic Address</label>
+            <textarea id="clinicAddress" rows="3" disabled></textarea>
+          </div>
+
+          <div class="field">
+            <label for="timezone">Timezone</label>
+            <select id="timezone" disabled>
+              <option>Asia/Kolkata</option>
+              <option>UTC</option>
+              <option>America/New_York</option>
+              <option>Europe/London</option>
+              <option>Australia/Sydney</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="language">Preferred Language</label>
+            <select id="language" disabled>
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Bilingual (EN + HI)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branding & Compliance -->
+      <div class="card">
+        <h2>Branding & Compliance</h2>
+        <p class="muted">Used in PDFs and legal documents.</p>
+
+        <div class="asset-row">
+          <div class="asset-box">
+            <h3>Clinic Logo</h3>
+            <div class="asset-preview" id="logoPreview">
+              <span class="placeholder">No logo uploaded</span>
+            </div>
+            <input type="file" id="logoInput" accept="image/*" disabled />
+          </div>
+
+          <div class="asset-box">
+            <h3>Clinic Stamp</h3>
+            <div class="asset-preview" id="stampPreview">
+              <span class="placeholder">No stamp uploaded</span>
+            </div>
+            <input type="file" id="stampInput" accept="image/*" disabled />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="privacyEmail">Privacy Contact Email</label>
+            <input id="privacyEmail" type="email" disabled />
+          </div>
+
+          <div class="field full">
+            <label for="defaultDisclaimer">Default Report Disclaimer</label>
+            <textarea id="defaultDisclaimer" rows="4" disabled></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subscription Plan -->
+      <div class="card full">
+        <h2>Subscription Plan</h2>
+        <p class="muted">Plan details are system-managed and cannot be edited.</p>
+
+        <div class="plan-grid">
+          <div class="plan-card">
+            <h3 id="planNameView">Starter</h3>
+            <p>Status: <span id="planStatusView">Active</span></p>
+            <p>Patient Limit: <b id="planPatientLimitView">250</b></p>
+            <p>AI Analysis: <b id="planAiView">Basic</b></p>
+            <p>Exports: <b id="planExportsView">PDF</b></p>
+            <p>Support: <b id="planSupportView">Email</b></p>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <span id="lastSavedText">Not saved yet.</span>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="card full">
+        <h2>Security</h2>
+        <p class="muted">Change account password.</p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="currentPassword">Current Password</label>
+            <input id="currentPassword" type="password" />
+          </div>
+
+          <div class="field">
+            <label for="newPassword">New Password</label>
+            <input id="newPassword" type="password" />
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input id="confirmPassword" type="password" />
+          </div>
+        </div>
+
+        <br>
+
+        <div>
+          <button id="changePasswordBtn" class="btn-primary" type="button">Change Password</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script type="module" src="/frontend/js/pages/profile.js"></script>
+</body>
+</html>

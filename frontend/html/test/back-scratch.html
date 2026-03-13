@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Back Scratch Test | FFTPro</title>
+
+  <link rel="stylesheet" href="/frontend/css/main_test.css" />
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="left">
+      <h1 class="page-title">Back Scratch Test</h1>
+    </div>
+
+    <div class="right">
+      <!-- status pill (JS uses statusDot + statusText) -->
+      <span class="badge ghost">
+        <span class="dot" id="statusDot" style="display:inline-block;width:8px;height:8px;border-radius:999px;background:#9ca3af;margin-right:8px;"></span>
+        <span id="statusText">Idle</span>
+      </span>
+
+      <a class="btn btn-ghost" href="/frontend/pages/dashboard.html">← Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+
+      <!-- LEFT: Camera -->
+      <section class="card camera-card">
+        <div class="card-head">
+          <h2>Camera Feed</h2>
+
+          <!-- JS updates this -->
+          <span class="badge warn" id="scoreBadge">SCORE: —</span>
+        </div>
+
+        <!-- ✅ stable camera container (prevents full width jump) -->
+        <div class="camera-shell">
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+        </div>
+
+        <p class="tip">
+          Requirement: BOTH elbows must be flexed &lt; 90° + both hands detected. Trial auto-starts (5s).
+        </p>
+
+        <div class="controls">
+          <button class="btn btn-primary" id="btnStart" type="button">Start Camera</button>
+          <button class="btn btn-outline" id="btnStop" type="button" disabled>Stop</button>
+          <button class="btn btn-outline" id="btnRestart" type="button" disabled>Restart 5s Trial</button>
+        </div>
+
+        <!-- Live panel (JS writes into these ids) -->
+        <div class="analysis-panel" id="livePanel">
+          <div class="analysis-row">
+            <span class="label">Time Left</span>
+            <span class="value" id="timeLeft">—</span>
+          </div>
+          <div class="analysis-row">
+            <span class="label">Distance (px)</span>
+            <span class="value" id="distPx">—</span>
+          </div>
+          <div class="analysis-row">
+            <span class="label">Classification</span>
+            <span class="value" id="cls">—</span>
+          </div>
+          <div class="analysis-row">
+            <span class="label">Posture</span>
+            <span class="value" id="posture">—</span>
+          </div>
+
+          <!-- JS writes messages here -->
+          <p class="analysis-hint" id="toast">
+            Tip: Use HTTPS/localhost. Keep shoulders, elbows, wrists visible.
+          </p>
+        </div>
+      </section>
+
+      <!-- RIGHT: Instructions + Setup & Result -->
+      <section class="card info-card">
+        <div class="card-head">
+          <h2>Instructions</h2>
+          <span class="badge ghost">Flexibility</span>
+        </div>
+
+        <div class="info-layout">
+
+          <div class="ref-img">
+            <img src="/frontend/assets/back-scratch.png" alt="Back Scratch reference" />
+          </div>
+
+          <div class="instructions">
+            <p class="domain">
+          <ol class="steps">
+              <li>Participant stands tall (or sits if needed), feet shoulder-width.</li>
+              <li>Place one arm over the shoulder reaching down the back (elbow up).</li>
+              <li>Place the other arm behind the back reaching upward (palm outward).</li>
+              <li>Try to touch/overlap middle fingers without forceful jerking.</li>
+              <li>Measure distance between middle fingertips: <b>cm</b>:
+                <ul>
+                  <li><b>Positive</b>  if fingers overlap (record overlap length)</li>
+                  <li><b>Negative</b>  if fingers do not meet (record gap)</li>
+                  <li><b>0</b> if they just touch</li>
+                </ul>
+              </li>
+              <li>Perform 1 practice, then 2 measured trials.</li>
+              <li>Repeat with arms swapped (right-over-left and left-over-right)</li>
+              <li>Record best score each side; note pain and compensations (trunk side-flexion, shoulder shrug).</li>
+            </ol>
+          </div>
+
+          <div class="record card-inner">
+        
+            <div class="form">
+              <div class="row two">
+                <div class="field">
+                  <label for="sideSel">Test side</label>
+                  <select id="sideSel">
+                    <option value="R_over_L">Right hand over shoulder, Left hand up the back</option>
+                    <option value="L_over_R">Left hand over shoulder, Right hand up the back</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="patientId">Patient ID</label>
+                  <input id="patientId" type="text" placeholder="e.g., PT-001" />
+                </div>
+              </div>
+
+              <div class="analysis-panel" style="margin-top:6px;">
+                <div class="analysis-row">
+                  <span class="label">Last Result</span>
+                  <span class="value" id="lastResult">—</span>
+                </div>
+              </div>
+
+              <!-- ✅ REQUIRED by your JS: nextBtn -->
+              <div class="actions">
+                <button class="btn btn-primary" type="button" id="nextBtn">Next Test →</button>
+              </div>
+
+              
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- ✅ MediaPipe globals (required by your JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+  <!-- ✅ your JS -->
+  <script type="module" src="/frontend/js/test/back-scratch.js"></script>
+</body>
+</html>

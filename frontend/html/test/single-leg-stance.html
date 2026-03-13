@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Single Leg Stance | FFTPro</title>
+  <link rel="stylesheet" href="/frontend/css/main_test.css" />
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="left">
+      <h1 class="page-title">Single Leg Stance</h1>
+    </div>
+
+    <div class="right">
+      <a class="btn btn-ghost" href="/frontend/pages/dashboard.html">← Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+
+      <!-- LEFT: Camera -->
+      <section class="card camera-card">
+        <div class="card-head">
+          <h2>Camera Feed</h2>
+          <span class="badge" id="camStatus">Ready</span>
+        </div>
+
+        <div class="camera-shell">
+          <video id="cameraFeed" autoplay playsinline muted></video>
+
+          <!-- overlay canvas to draw skeleton -->
+          <canvas id="overlayCanvas"></canvas>
+
+          <!-- Hidden canvas used for extracting frames to send to server -->
+          <canvas id="frameCanvas" class="hidden"></canvas>
+        </div>
+
+        <p class="tip">
+          Keep the full body visible (head-to-feet). Stand side-on or facing camera as instructed.
+          Keep hands on hips (if your protocol requires).
+        </p>
+
+        <div class="controls">
+          <button class="btn btn-primary" id="startCameraBtn" type="button">Start Camera</button>
+          <button class="btn btn-primary" id="startTestBtn" type="button" disabled>Start Test</button>
+          <button class="btn btn-outline" id="recordBtn" type="button" disabled>Record Hold</button>
+          <button class="btn btn-outline" id="stopCameraBtn" type="button" disabled>Stop</button>
+        </div>
+
+        <!-- System checks -->
+        <div class="analysis-panel">
+          <div class="analysis-row">
+            <span class="label">Tracking Status</span>
+            <span class="value" id="stageText">Not started</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Distance Check</span>
+            <span class="value" id="distanceText">Not measured</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Lighting</span>
+            <span class="value" id="lightingText">Not checked</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Landmark Quality</span>
+            <span class="value" id="landmarkText">—</span>
+          </div>
+        </div>
+
+        <!-- Live feedback -->
+        <div class="analysis-panel" id="livePanel">
+          <div class="analysis-row">
+            <span class="label">Test Leg</span>
+            <span class="value" id="sideText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Hold Time (sec)</span>
+            <span class="value" id="holdText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Best Hold (sec)</span>
+            <span class="value" id="bestHoldText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Foot Down Count</span>
+            <span class="value" id="footDownText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Sway (proxy)</span>
+            <span class="value" id="swayText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Quality</span>
+            <span class="value" id="qualityText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Recorded (sec)</span>
+            <span class="value" id="recordedText">—</span>
+          </div>
+
+          <p class="analysis-hint" id="warningText">
+            Warnings will appear here (distance, lighting, occlusion, hopping, foot-down).
+          </p>
+        </div>
+
+        <input type="hidden" id="patientHeightCm" value="170" />
+        <input type="hidden" id="lastRecordedSide" value="" />
+        <input type="hidden" id="lastRecordedValue" value="" />
+      </section>
+
+      <!-- RIGHT: Instructions + Record Results -->
+      <section class="card info-card">
+        <div class="card-head">
+          <h2>Instructions</h2>
+          <span class="badge ghost">Balance</span>
+        </div>
+
+        <div class="info-layout">
+
+          <div class="ref-img">
+            <img src="/frontend/assets/single-leg-stance.png" alt="Single Leg Stance reference">
+          </div>
+
+          <div class="instructions">
+            <p class="domain">
+              Assesses: <b>static balance + postural control</b> (fall risk screen).
+            </p>
+
+            <ol class="steps">
+              <li>Stand barefoot or with standard footwear (as per protocol), near a wall/chair for safety.</li>
+              <li>Keep arms on hips (or by sides if your protocol says), look straight ahead.</li>
+              <li>Lift one foot off the ground (do not touch the standing leg).</li>
+              <li>Start timing when the foot leaves the ground and posture is stable.</li>
+              <li>Stop timing if:
+                <ul>
+                  <li>Raised foot touches the floor</li>
+                  <li>Raised foot touches the stance leg</li>
+                  <li>Stance foot moves/steps/hops</li>
+                  <li>Arms leave hips (if required)</li>
+                </ul>
+              </li>
+              <li>Perform on <b>both sides</b>. Record the <b>best hold time (seconds)</b> for each leg.</li>
+            </ol>
+
+            <p class="muted" style="margin-top:10px;">
+              Tip: Use <b>Record Hold</b> at the best stable moment,
+              and it will fill the correct side automatically.
+            </p>
+          </div>
+
+          <div class="record card-inner">
+            <h3>Record Results</h3>
+            <p class="muted">Enter best hold time for each leg (seconds). Example: 12.4</p>
+
+            <form id="resultForm" class="form">
+              <div class="row two">
+                <div class="field">
+                  <label for="rightScore">Left Leg (sec)</label>
+                  <input id="rightScore" type="number" min="0" step="0.1" placeholder="e.g., 14.2" required />
+                </div>
+
+                <div class="field">
+                  <label for="leftScore">Right Leg (sec)</label>
+                  <input id="leftScore" type="number" min="0" step="0.1" placeholder="e.g., 11.8" required />
+                </div>
+              </div>
+
+              <div class="msg" id="autoFillMsg" aria-live="polite" style="margin-top:-6px;"></div>
+
+              </div>
+
+              <div class="actions">
+                <button class="btn btn-primary" type="submit" id="submitBtn">Submit Test Results</button>
+                <button class="btn btn-primary" type="button" id="nextBtn">Next Test →</button>
+              </div>
+
+              <div class="msg" id="msgBox" aria-live="polite"></div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- ✅ MediaPipe dependencies (must load BEFORE your test JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+
+  <!-- Your test logic -->
+  <script src="/frontend/js/test/single-leg-stance.js" defer></script>
+</body>
+</html>

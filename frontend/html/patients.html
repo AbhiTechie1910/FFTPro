@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patients Dashboard | FFTPro</title>
+  <link rel="stylesheet" href="../css/patients.css" />
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <h2 class="brand">
+        <a href="dashboard.html" class="brand-link">FFT<span>Pro</span></a>
+      </h2>
+
+      <nav class="topbar-nav">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="dashboard.html#patients" class="active">Patients</a></li>
+          <li><a href="patient-intake.html">New Patient</a></li>
+          <li><a href="dashboard.html#reports">Reports</a></li>
+          <li><a href="functional-tests.html">Functional Tests</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <a class="btn btn-ghost" href="./dashboard.html">← Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <!-- Summary Cards -->
+    <section class="stats-grid">
+      <article class="stat-card">
+        <p class="stat-label">Total Patients</p>
+        <h2 class="stat-value" id="totalPatients">0</h2>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">Total Assessments</p>
+        <h2 class="stat-value" id="totalAssessments">0</h2>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">Completed Assessments</p>
+        <h2 class="stat-value good" id="completedAssessments">0</h2>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">At Risk Patients</p>
+        <h2 class="stat-value danger" id="atRiskPatients">0</h2>
+      </article>
+    </section>
+
+    <!-- Charts -->
+    <section class="charts-grid">
+      <article class="card chart-card">
+        <div class="card-head">
+          <h2>Functional Status Distribution</h2>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="statusChart" width="420" height="260"></canvas>
+        </div>
+      </article>
+
+      <article class="card chart-card">
+        <div class="card-head">
+          <h2>Assessment Completion Overview</h2>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="completionChart" width="420" height="260"></canvas>
+        </div>
+      </article>
+    </section>
+
+    <!-- Filters -->
+    <section class="card filter-card">
+      <div class="card-head">
+        <h2>Filter Patients</h2>
+      </div>
+
+      <div class="filter-grid">
+        <div class="field">
+          <label for="searchInput">Search</label>
+          <input type="text" id="searchInput" placeholder="Patient ID or full name" />
+        </div>
+
+        <div class="field">
+          <label for="genderFilter">Gender</label>
+          <select id="genderFilter">
+            <option value="all">All</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="statusFilter">Overall Status</label>
+          <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="Completed">Completed</option>
+            <option value="Incomplete Assessment">Incomplete Assessment</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="riskFilter">Fall Risk</label>
+          <select id="riskFilter">
+            <option value="all">All</option>
+            <option value="At Risk">At Risk</option>
+            <option value="Low Risk">Low Risk</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="ageGroupFilter">Age Group</label>
+          <select id="ageGroupFilter">
+            <option value="all">All</option>
+            <option value="60-69">60–69</option>
+            <option value="70-79">70–79</option>
+            <option value="80+">80+</option>
+            <option value="below-60">Below 60</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn btn-primary" id="applyFiltersBtn" type="button">Apply Filters</button>
+        <button class="btn btn-light" id="clearFiltersBtn" type="button">Clear Filters</button>
+      </div>
+    </section>
+
+    <!-- Patients Table -->
+    <section class="card table-card">
+      <div class="card-head row-between">
+        <h2>Patients</h2>
+        <a class="btn btn-primary" href="./patient-intake.html">Create New Assessment</a>
+      </div>
+
+      <div class="table-wrap">
+        <table class="patients-table">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Overall Status</th>
+              <th>Fall Risk</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="patientsTableBody">
+            <tr>
+              <td colspan="7" class="empty-cell">Loading patients...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Patient Details Modal -->
+  <div class="modal-backdrop hidden" id="patientModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalPatientName">Patient Details</h2>
+          <p id="modalPatientSubtitle">Demographics and assessment data</p>
+        </div>
+        <button class="modal-close" id="closeModalBtn" aria-label="Close modal" type="button">×</button>
+      </div>
+
+      <div class="modal-body">
+        <section class="detail-section">
+          <h3>Demographics</h3>
+          <div class="detail-grid" id="demographicDetails"></div>
+        </section>
+
+        <section class="detail-section">
+          <h3>Related Test Details</h3>
+          <div id="testDetailsContainer" class="test-panels"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/patients.js"></script>
+</body>
+</html>

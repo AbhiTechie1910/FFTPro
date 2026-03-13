@@ -1,0 +1,559 @@
+:root{
+  --topbar-h: 74px;
+  --topbar-bg: #ffffff;
+  --topbar-border: #e5e7eb;
+  --page-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-muted: #f1f5f9;
+  --brand-color: #163b6d;
+  --accent: #4cb6b5;
+  --accent-dark: #0f766e;
+  --text-main: #1f2937;
+  --text-strong: #0f172a;
+  --text-muted: #6b7280;
+  --text-soft: #475569;
+  --nav-text: #334155;
+  --nav-hover: #163b6d;
+  --border: #d1d5db;
+  --border-soft: #e5e7eb;
+  --border-light: #dbe3ea;
+  --danger: #b91c1c;
+  --danger-soft: #fee2e2;
+  --danger-border: #fecaca;
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+  --transition: 0.2s ease;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+html,
+body{
+  height: 100%;
+  overflow: hidden;
+}
+
+body{
+  min-height: 100vh;
+  background-color: var(--page-bg);
+  color: var(--text-main);
+}
+
+/* =========================
+   Topbar
+   ========================= */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--topbar-border);
+}
+
+.topbar-left{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  min-width: 0;
+}
+
+.brand{
+  margin: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.brand-link{
+  text-decoration: none;
+  color: var(--brand-color);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.brand-link span{
+  color: var(--accent);
+}
+
+/* =========================
+   Navigation
+   ========================= */
+.topbar-nav ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.topbar-nav ul li a{
+  text-decoration: none;
+  color: var(--nav-text);
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.topbar-nav ul li a:hover,
+.topbar-nav ul li a.active{
+  color: var(--nav-hover);
+}
+
+/* =========================
+   Topbar Right
+   ========================= */
+.topbar-right{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+#currentDate{
+  font-size: 15px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* =========================
+   User Menu
+   ========================= */
+.user-menu{
+  position: relative;
+}
+
+.user-btn{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 10px 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-strong);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.user-btn:hover{
+  background: var(--surface-muted);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.user-name{
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-strong);
+  white-space: nowrap;
+}
+
+.user-role{
+  padding: 5px 9px;
+  border-radius: var(--radius-full);
+  background: #e5e7eb;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* =========================
+   User Dropdown
+   ========================= */
+.user-dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  padding: 8px 0;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: none;
+  z-index: 2000;
+}
+
+.user-dropdown.show{
+  display: block;
+}
+
+.user-dropdown a{
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.user-dropdown a:hover{
+  background: var(--surface-soft);
+}
+
+.user-dropdown a.logout{
+  color: var(--danger);
+}
+
+/* =========================
+   Action Buttons
+   ========================= */
+.action-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 40px;
+  padding: 0 14px;
+  margin-right: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.action-btn:hover{
+  background: #f3f4f6;
+}
+
+.view-btn:hover{
+  background: #eef2f7;
+  border-color: #cbd5e1;
+}
+
+.assess-btn{
+  border-color: #93c5fd;
+  color: #0f766e;
+}
+
+.assess-btn:hover{
+  background: #eefaf9;
+  border-color: var(--accent);
+}
+
+.delete-btn{
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.delete-btn:hover{
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+}
+
+/* =========================
+   Main Content
+   ========================= */
+.main-content{
+  height: calc(100vh - var(--topbar-h));
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 32px 20px;
+}
+
+/* =========================
+   Dashboard Header
+   ========================= */
+.dashboard-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1{
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--brand-color);
+}
+
+/* =========================
+   Summary Cards
+   ========================= */
+.summary-cards{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.card{
+  padding: 18px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.card h3{
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.card p{
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+/* =========================
+   Patients Section
+   ========================= */
+.patients-section h2,
+.reports-section h2{
+  margin-bottom: 16px;
+  font-size: 24px;
+  color: var(--text-strong);
+}
+
+.patients-controls{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.patients-controls input{
+  flex: 1;
+  min-width: 240px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: #ffffff;
+  font-size: 15px;
+  color: var(--text-main);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.patients-controls input:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(76, 182, 181, 0.12);
+}
+
+/* =========================
+   Patients Table
+   ========================= */
+#patientsTable{
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#patientsTable th,
+#patientsTable td{
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+#patientsTable th{
+  background: #f9fafb;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+#patientsTable td{
+  color: var(--text-main);
+}
+
+#patientsTable tr:hover{
+  background-color: #f3f4f6;
+}
+
+/* =========================
+   Reports
+   ========================= */
+.reports-section{
+  margin-top: 28px;
+}
+
+.reports-section h2{
+  margin-bottom: 20px;
+}
+
+.reports-section p{
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* =========================
+   Primary Button
+   ========================= */
+.btn-primary{
+  display: inline-block;
+  padding: 13px 22px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.btn-primary:hover{
+  background-color: var(--accent-dark);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 1100px){
+  .topbar{
+    padding: 0 20px;
+  }
+
+  .topbar-left{
+    gap: 24px;
+  }
+
+  .topbar-nav ul{
+    gap: 18px;
+  }
+
+  .topbar-nav ul li a{
+    font-size: 16px;
+  }
+
+  #currentDate{
+    display: none;
+  }
+
+  .summary-cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .main-content{
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px){
+  html,
+  body{
+    overflow: auto;
+  }
+
+  .topbar{
+    height: auto;
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .topbar-left{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .topbar-nav ul{
+    gap: 14px;
+  }
+
+  .topbar-right{
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .main-content{
+    height: auto;
+    overflow: visible;
+    padding: 20px 16px;
+  }
+
+  .summary-cards{
+    grid-template-columns: 1fr;
+  }
+
+  .patients-controls{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patients-controls input{
+    width: 100%;
+    min-width: 100%;
+  }
+
+  #patientsTable{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .user-btn{
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .user-dropdown{
+    left: 0;
+    right: auto;
+  }
+}

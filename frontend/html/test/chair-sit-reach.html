@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chair Sit & Reach | FFTPro</title>
+  <link rel="stylesheet" href="/frontend/css/main_test.css" />
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="left">
+      <h1 class="page-title">Chair Sit & Reach</h1>
+      <p class="subtitle" id="patientLine">Loading patient…</p>
+    </div>
+
+    <div class="right">
+      <a class="btn btn-ghost" href="/frontend/pages/dashboard.html">← Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+
+      <!-- LEFT: Camera -->
+      <section class="card camera-card">
+        <div class="card-head">
+          <h2>Camera Feed</h2>
+          <span class="badge" id="camStatus">Ready</span>
+        </div>
+
+        <div class="camera-shell">
+          <video id="cameraFeed" autoplay playsinline muted></video>
+
+          <!-- overlay canvas to draw skeleton -->
+          <canvas id="overlayCanvas"></canvas>
+
+          <!-- Hidden canvas used for snapshots (compensation capture) -->
+          <canvas id="frameCanvas" class="hidden"></canvas>
+        </div>
+
+        <p class="tip">
+          Keep the full body visible (head-to-feet). Chair and heel must be visible.
+        </p>
+
+        <div class="controls">
+          <button class="btn btn-primary" id="startCameraBtn" type="button">Start Camera</button>
+          <button class="btn btn-primary" id="starttestbtn" type="button" disabled>Start Test</button>
+
+          <button class="btn btn-outline" id="recordBtn" type="button" disabled>Record Score</button>
+
+          <button class="btn btn-outline" id="stopCameraBtn" type="button" disabled>Stop</button>
+        </div>
+
+        <!-- Basic system checks -->
+        <div class="analysis-panel">
+          <div class="analysis-row">
+            <span class="label">Tracking Status</span>
+            <span class="value" id="stageText">Not started</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Distance Check</span>
+            <span class="value" id="distanceText">Not measured</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Lighting</span>
+            <span class="value" id="lightingText">Not checked</span>
+          </div>
+
+          <p class="analysis-hint">
+            Live values will appear while camera is running.
+          </p>
+        </div>
+
+        <!-- Live feedback -->
+        <div class="analysis-panel" id="livePanel">
+          <div class="analysis-row">
+            <span class="label">Selected Leg</span>
+            <span class="value" id="sideText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Reach (debug)</span>
+            <span class="value" id="reachCurrentText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Best Reach (debug)</span>
+            <span class="value" id="reachBestText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Hold Time (sec)</span>
+            <span class="value" id="holdText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Knee Angle (deg)</span>
+            <span class="value" id="kneeText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Quality</span>
+            <span class="value" id="qualityText">—</span>
+          </div>
+
+          <div class="analysis-row">
+            <span class="label">Recorded Score</span>
+            <span class="value" id="recordedText">—</span>
+          </div>
+
+          <p class="analysis-hint" id="warningText">
+            Compensation/sway will be flagged here. If flagged → auto score -1 + snapshot.
+          </p>
+        </div>
+
+        <!-- Store last recorded side/value for backend later -->
+        <input type="hidden" id="lastRecordedSide" value="" />
+        <input type="hidden" id="lastRecordedValue" value="" />
+
+        <!-- OPTIONAL: if you later want to store flags -->
+        <input type="hidden" id="lastRecordedFlags" value="" />
+
+      </section>
+
+      <!-- RIGHT: Instructions + Record Results -->
+      <section class="card info-card">
+        <div class="card-head">
+          <h2>Instructions</h2>
+          <span class="badge ghost">Flexibility</span>
+        </div>
+
+        <div class="info-layout">
+
+          <div class="ref-img">
+            <img src="../assets/chair-sit-reach.png" alt="Chair Sit & Reach reference">
+          </div>
+
+          <div class="instructions">
+            <p class="domain">
+              Assesses: <b>hamstrings + lower back flexibility</b> (posterior chain).
+            </p>
+
+            <ol class="steps">
+              <li>Place a chair against a wall to prevent sliding.</li>
+              <li>Patient sits upright; straight back; one foot flat on the floor.</li>
+              <li>Extend the test leg forward: heel on floor, toes up (dorsiflexed).</li>
+              <li>Keep the knee straight (no bending). Reach forward with the hand.</li>
+              <li>Hold the farthest position for ~2 seconds.</li>
+              <li><b>Score</b> (per leg):
+                <ul>
+                  <li><b>+1</b> if fingertip goes beyond toe (no compensation)</li>
+                  <li><b>0</b> if fingertip just touches toe (no compensation)</li>
+                  <li><b>-1</b> if fingertip does not reach toe</li>
+                  <li><b>-1</b> if any compensatory movement/postural sway is detected (auto-fail + snapshot)</li>
+                </ul>
+              </li>
+              <li>Do 2 trials per leg; record the best score for each side.</li>
+            </ol>
+
+            <p class="muted" style="margin-top:10px;">
+              Tip: Choose the test leg (Left/Right) under the camera controls. The system will auto-record after a stable hold,
+              or you can press <b>Record Score</b>.
+            </p>
+          </div>
+
+          <div class="record card-inner">
+            <h3>Record Results</h3>
+            <p class="muted">Enter best score per side: +1, 0, -1</p>
+
+            <form id="resultForm" class="form">
+              <div class="row two">
+                <div class="field">
+                  <label for="rightScore">Right Leg (score)</label>
+                  <input id="rightScore" type="text" placeholder="e.g., +1" required />
+                  <small class="hint">Best of 2 trials</small>
+                </div>
+
+                <div class="field">
+                  <label for="leftScore">Left Leg (score)</label>
+                  <input id="leftScore" type="text" placeholder="e.g., -1" required />
+                  <small class="hint">Best of 2 trials</small>
+                </div>
+              </div>
+
+              <div class="msg" id="autoFillMsg" aria-live="polite" style="margin-top:-6px;"></div>
+
+              <div class="row two">
+                <div class="field">
+                  <label for="chairHeight">Chair Height (optional)</label>
+                  <input id="chairHeight" type="number" min="0" step="0.1" placeholder="cm" />
+                </div>
+
+                <div class="field">
+                  <label for="attempts">Trials per side</label>
+                  <select id="attempts">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn btn-primary" type="submit" id="submitBtn">Submit Test Results</button>
+                <button class="btn btn-primary" type="button" id="nextBtn">Next Test →</button>
+              </div>
+
+              <div class="msg" id="msgBox" aria-live="polite"></div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- ✅ SHOW ERRORS ON PAGE (no console needed) -->
+  <script>
+    window.addEventListener("error", (e) => {
+      const box = document.getElementById("msgBox");
+      if (box) box.textContent = "JS Error: " + (e.message || e.error || e);
+      const badge = document.getElementById("camStatus");
+      if (badge) badge.textContent = "Error";
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      const box = document.getElementById("msgBox");
+      if (box) box.textContent = "Promise Error: " + (e.reason?.message || e.reason || e);
+      const badge = document.getElementById("camStatus");
+      if (badge) badge.textContent = "Error";
+    });
+  </script>
+
+  <!-- ✅ IMPORTANT: module is REQUIRED because chair-sit-reach.js uses import -->
+  <script type="module" src="/frontend/js/test/chair-sit-reach.js"></script>
+
+</body>
+</html>
